@@ -109,15 +109,32 @@
 			image.removeAttr('width').removeAttr('height');
 			image.css({'width': 'auto', 'height': 'auto'});
 
-			var parent_height = parent.height();
+			// Account for ancestors that are hidden to ensure we're getting
+			// the correct sizes.
+			var ancestor = image.get(0),
+				hiddenAncestors = [];
+			while (ancestor.tagName != 'BODY') {
+				if (ancestor.style.display == 'none') {
+					hiddenAncestors.push(ancestor);
+					ancestor.style.display = 'block';
+				}
+				ancestor = ancestor.parentNode;
+			}
+
 			var parent_width = parent.width();
-			var image_height = image.height();
+			var parent_height = parent.height();
 			var image_width = image.width();
+			var image_height = image.height();
 
 			resize_image();
 			if (params.center) {
 				reposition_image();
 			}
+
+			for (var i = 0; i < hiddenAncestors.length; i++) {
+				hiddenAncestors[i].style.display = 'none';
+			}
+
 			show_image();
 
 			function resize_image() {
