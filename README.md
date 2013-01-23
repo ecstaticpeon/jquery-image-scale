@@ -37,14 +37,19 @@ The image will automatically center itself if the scale parameter is set to 'fil
 
 When set, images that are not already cached by the browser will load hidden, then fade in. 0 to disable. Defaults to 0.
 
+**rescale_after_resize (boolean)**
+
+Whether to rescale images when the browser is resized. Defaults to true.
+
     $('img').imgscale({
         parent_css_selector: null, // Defaults to the image's immediate parent.
         scale: 'fill',
         center: true,
-        fade_duration: 0 // Fading is disabled if set to 0.
+        fade_duration: 0, // Fading is disabled if set to 0.
+        rescale_after_resize: true
     });
 
-### Credit
+### Credits
 
 This plugin is based on [Kelly Meath's work](http://imgscale.kjmeath.com/).
 

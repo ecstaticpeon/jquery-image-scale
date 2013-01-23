@@ -44,7 +44,11 @@
 			 * cached by the browser will load hidden, then fade in. 0 to
 			 * disable.
 			 */
-			fade_duration: 0
+			fade_duration: 0,
+			/**
+			 * Boolean. Whether to rescale images when the browser is resized.
+			 */
+			rescale_after_resize: true
 		}, params);
 
 		// https://gist.github.com/527683
@@ -62,35 +66,44 @@
 			return v > 4 ? v : undef;
 		}());
 
-		this.each(function() {
-			var image = $(this);
-			if (params.parent_css_selector) {
-				var parent = img.parents(params.parent_css_selector);
-			}
-			else {
-				var parent = image.parent();
-			}
+		parse_images(this);
+		if (params.rescale_after_resize) {
+			$(window).resize(function() {
+				parse_images(this);
+			}.bind(this));
+		}
 
-			parent.css({
-				opacity: 0,
-				overflow: 'hidden'
-			});
-
-			if (parent.length) {
-				if (image.get(0).complete) {
-					scale_image(image, parent, params);
+		function parse_images(images) {
+			images.each(function() {
+				var image = $(this);
+				if (params.parent_css_selector) {
+					var parent = img.parents(params.parent_css_selector);
 				}
 				else {
-					image.bind('load', function() {
+					var parent = image.parent();
+				}
+
+				parent.css({
+					opacity: 0,
+					overflow: 'hidden'
+				});
+
+				if (parent.length) {
+					if (image.get(0).complete) {
 						scale_image(image, parent, params);
-					});
-					if (ie_version == 9) {
-						// IE 9 bug - the load event isn't triggered.
-						image.attr('src', image.attr('src'));
+					}
+					else {
+						image.bind('load', function() {
+							scale_image(image, parent, params);
+						});
+						if (ie_version == 9) {
+							// IE 9 bug - the load event isn't triggered.
+							image.attr('src', image.attr('src'));
+						}
 					}
 				}
-			}
-		});
+			});
+		}
 
 		function scale_image(image, parent, params) {
 			image.removeAttr('width').removeAttr('height');
@@ -129,6 +142,8 @@
 			function reposition_image() {
 				var new_width = image.width();
 				var new_height = image.height();
+
+				image.css({'margin-left': 0, 'margin-top': 0});
 
 				if (new_width > parent_width) {
 					image.css(
