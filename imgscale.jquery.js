@@ -89,7 +89,7 @@
 				});
 
 				if (parent.length) {
-					if (image.get(0).complete) {
+					if (this.complete) {
 						scale_image(image, parent, params);
 					}
 					else {
@@ -98,7 +98,7 @@
 						});
 						if (ie_version == 9) {
 							// IE 9 bug - the load event isn't triggered.
-							image.attr('src', image.attr('src'));
+							this.src = this.src;
 						}
 					}
 				}
@@ -121,10 +121,10 @@
 				ancestor = ancestor.parentNode;
 			}
 
-			var parent_width = parent.width();
-			var parent_height = parent.height();
-			var image_width = image.width();
-			var image_height = image.height();
+			var parent_width = parent.width(),
+				parent_height = parent.height(),
+				image_width = image.width(),
+				image_height = image.height();
 
 			resize_image();
 			if (params.center) {
@@ -157,8 +157,8 @@
 			}
 
 			function reposition_image() {
-				var new_width = image.width();
-				var new_height = image.height();
+				var new_width = image.width(),
+					new_height = image.height();
 
 				image.css({'margin-left': 0, 'margin-top': 0});
 
