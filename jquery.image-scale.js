@@ -185,5 +185,7 @@
 				}
 			}
 		}
+
+		return this;
 	}
 })(jQuery);
