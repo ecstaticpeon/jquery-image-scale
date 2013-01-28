@@ -14,7 +14,7 @@ HTML
 JavaScript
 
     $(document).ready(function() {
-        $('img').imgscale();
+        $('img').imageScale();
     }
 
 ### Options
@@ -41,7 +41,7 @@ When set, images that are not already cached by the browser will load hidden, th
 
 Whether to rescale images when the browser is resized. Defaults to true.
 
-    $('img').imgscale({
+    $('img').imageScale({
         parent_css_selector: null, // Defaults to the image's immediate parent.
         scale: 'fill',
         center: true,

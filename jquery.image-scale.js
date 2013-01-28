@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 (function($) {
-	$.fn.imgscale = function(params) {
+	$.fn.imageScale = function(params) {
 		params = $.extend({
 			/**
 			 * CSS selector used to get the image container against which the
