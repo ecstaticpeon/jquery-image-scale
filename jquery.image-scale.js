@@ -19,6 +19,8 @@
  */
 (function($) {
 	$.fn.imageScale = function(params) {
+		var _matched_elements = this;
+
 		params = $.extend({
 			/**
 			 * CSS selector used to get the image container against which the
@@ -66,11 +68,11 @@
 			return v > 4 ? v : undef;
 		}());
 
-		parse_images(this);
+		parse_images(_matched_elements);
 		if (params.rescale_after_resize) {
 			$(window).resize(function() {
-				parse_images(this);
-			}.bind(this));
+				parse_images(_matched_elements);
+			});
 		}
 
 		function parse_images(images) {
