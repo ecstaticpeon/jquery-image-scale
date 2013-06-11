@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>jquery-image-scale tests</title>
+
+	<style type="text/css">
+		h2 {
+			border-bottom: 1px solid black;
+			margin-top: 20px;
+		}
+		div {
+			background-color: pink;
+			border: 1px dashed black;
+			margin-bottom: 10px;
+		}
+	</style>
+
+	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="../jquery.image-scale.js"></script>
+	<script type="text/javascript">
+		jQuery(function($) {
+			$('.fill').imageScale({
+				scale: 'fill'
+			});
+		});
+		jQuery(function($) {
+			$('.fit').imageScale({
+				scale: 'fit'
+			});
+		});
+		jQuery(function($) {
+			$('.not-centered').imageScale({
+				center: false
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<h1>jquery-image-scale tests</h1>
+	<h2>Fill</h2>
+
+	<div style="width: 400px; height: 200px;">
+		<img class="fill" src="images/wide.jpg" alt="" />
+	</div>
+	<div style="width: 200px; height: 300px;">
+		<img class="fill" src="images/wide.jpg" alt="" />
+	</div>
+	<div style="width: 200px; height: 200px;">
+		<img class="fill" src="images/wide.jpg" alt="" />
+	</div>
+
+	<div style="width: 300px; height: 200px;">
+		<img class="fill" src="images/high.jpg" alt="" />
+	</div>
+	<div style="width: 200px; height: 300px;">
+		<img class="fill" src="images/high.jpg" alt="" />
+	</div>
+	<div style="width: 200px; height: 200px;">
+		<img class="fill" src="images/high.jpg" alt="" />
+	</div>
+
+	<div style="width: 300px; height: 200px;">
+		<img class="fill" src="images/square.png" alt="" />
+	</div>
+	<div style="width: 200px; height: 300px;">
+		<img class="fill" src="images/square.png" alt="" />
+	</div>
+	<div style="width: 200px; height: 200px;">
+		<img class="fill" src="images/square.png" alt="" />
+	</div>
+
+	<h2>Fit</h2>
+
+	<div style="width: 400px; height: 200px;">
+		<img class="fit" src="images/wide.jpg" alt="" />
+	</div>
+	<div style="width: 200px; height: 300px;">
+		<img class="fit" src="images/wide.jpg" alt="" />
+	</div>
+	<div style="width: 200px; height: 200px;">
+		<img class="fit" src="images/wide.jpg" alt="" />
+	</div>
+
+	<div style="width: 300px; height: 200px;">
+		<img class="fit" src="images/high.jpg" alt="" />
+	</div>
+	<div style="width: 200px; height: 300px;">
+		<img class="fit" src="images/high.jpg" alt="" />
+	</div>
+	<div style="width: 200px; height: 200px;">
+		<img class="fit" src="images/high.jpg" alt="" />
+	</div>
+
+	<div style="width: 300px; height: 200px;">
+		<img class="fit" src="images/square.png" alt="" />
+	</div>
+	<div style="width: 200px; height: 300px;">
+		<img class="fit" src="images/square.png" alt="" />
+	</div>
+	<div style="width: 200px; height: 200px;">
+		<img class="fit" src="images/square.png" alt="" />
+	</div>
+
+	<h2>Not centered</h2>
+
+	<div style="width: 300px; height: 200px;">
+		<img class="not-centered" src="images/high.jpg" alt="" />
+	</div>
+
+	<h2>Load event (3s)</h2>
+
+	<div style="width: 300px; height: 200px;">
+		<img class="fill" src="images/slow-image.php" alt="" />
+	</div>
+</body>
+</html>
