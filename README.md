@@ -52,6 +52,3 @@ Whether to rescale images when the browser is resized. Defaults to true.
 ### Credits
 
 This plugin is based on [Kelly Meath's work](http://imgscale.kjmeath.com/).
-
-It also uses James Padolsey's
-[clever snippet to detect Internet Explorer's version](https://gist.github.com/527683).

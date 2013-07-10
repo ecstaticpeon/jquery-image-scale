@@ -53,23 +53,13 @@
 			rescale_after_resize: true
 		}, params);
 
-		// https://gist.github.com/527683
-		var ie_version = (function() {
-			var undef,
-				v = 3,
-				div = document.createElement('div'),
-				all = div.getElementsByTagName('i');
-			
-			while (
-				div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
-				all[0]
-			);
-			
-			return v > 4 ? v : undef;
-		}());
-		if (/*@cc_on !@*/false && typeof(ie_version) == 'undefined') {
+		var ie_version = undefined;
+		/*@cc_on
+		if (typeof(ie_version) == 'undefined') {
+			// Beware this reports an incorrect version when using browser mode.
 			ie_version = parseInt(@_jscript_version);
 		}
+		@*/
 
 		parse_images(_matched_elements);
 		if (params.rescale_after_resize) {
@@ -101,8 +91,13 @@
 						image.bind('load', function() {
 							scale_image(image, parent, params);
 						});
-						if (ie_version == 9) {
-							// IE 9 bug - the load event isn't triggered.
+						if (typeof(ie_version) != 'undefined') {
+							// On some versions of IE (9 and 10 at the time of
+							// writing) the load event isn't triggered. Run
+							// this workaround for all versions instead of
+							// trying to keep an up to date list of broken
+							// versions. Also browser mode can inherit bugs
+							// from the actual browser.
 							this.src = this.src;
 						}
 					}
