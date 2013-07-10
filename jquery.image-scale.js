@@ -67,6 +67,9 @@
 			
 			return v > 4 ? v : undef;
 		}());
+		if (/*@cc_on !@*/false && typeof(ie_version) == 'undefined') {
+			ie_version = parseInt(@_jscript_version);
+		}
 
 		parse_images(_matched_elements);
 		if (params.rescale_after_resize) {
