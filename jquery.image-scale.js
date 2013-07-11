@@ -53,14 +53,6 @@
 			rescale_after_resize: true
 		}, params);
 
-		var ie_version = undefined;
-		/*@cc_on
-		if (typeof(ie_version) == 'undefined') {
-			// Beware this reports an incorrect version when using browser mode.
-			ie_version = parseInt(@_jscript_version);
-		}
-		@*/
-
 		parse_images(_matched_elements);
 		if (params.rescale_after_resize) {
 			$(window).resize(function() {
@@ -84,23 +76,11 @@
 				});
 
 				if (parent.length) {
-					if (this.complete) {
+					image.bind('load', function() {
 						scale_image(image, parent, params);
-					}
-					else {
-						image.bind('load', function() {
-							scale_image(image, parent, params);
-						});
-						if (typeof(ie_version) != 'undefined') {
-							// On some versions of IE (9 and 10 at the time of
-							// writing) the load event isn't triggered. Run
-							// this workaround for all versions instead of
-							// trying to keep an up to date list of broken
-							// versions. Also browser mode can inherit bugs
-							// from the actual browser.
-							this.src = this.src;
-						}
-					}
+					});
+					// Trigger load event for cache images.
+					this.src = this.src;
 				}
 			});
 		}
