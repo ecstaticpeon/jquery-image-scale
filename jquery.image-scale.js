@@ -56,11 +56,11 @@
 		parse_images(_matched_elements);
 		if (params.rescale_after_resize) {
 			$(window).resize(function() {
-				parse_images(_matched_elements);
+				parse_images(_matched_elements, true);
 			});
 		}
 
-		function parse_images(images) {
+		function parse_images(images, skip_init) {
 			images.each(function() {
 				var image = $(this);
 				if (params.parent_css_selector) {
@@ -70,10 +70,12 @@
 					var parent = image.parent();
 				}
 
-				parent.css({
-					opacity: 0,
-					overflow: 'hidden'
-				});
+				if (!skip_init) {
+					parent.css({
+						opacity: 0,
+						overflow: 'hidden'
+					});
+				}
 
 				if (parent.length) {
 					image.bind('load', function() {
