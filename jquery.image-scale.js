@@ -80,7 +80,11 @@
 						scale_image(image, parent, params);
 					});
 					// Trigger load event for cache images.
-					this.src = this.src;
+					 var src = this.src;
+					// Webkit hack from http://groups.google.com/group/jquery-dev/browse_thread/thread/eee6ab7b2da50e1f
+					// Data uri bypasses webkit log warning (thx doug jones).
+					this.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+					this.src = src;
 				}
 			});
 		}
