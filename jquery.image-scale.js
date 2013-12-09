@@ -50,7 +50,11 @@
 			/**
 			 * Boolean. Whether to rescale images when the browser is resized.
 			 */
-			rescale_after_resize: true
+			rescale_after_resize: true,
+			/**
+			 * Integer. Padding around the image.
+			 */
+			padding: 0
 		}, params);
 
 		parse_images(_matched_elements);
@@ -126,7 +130,7 @@
 			function resize_image() {
 				if (parent_width / image_width > parent_height / image_height) {
 					if (params.scale == 'fit') {
-						image.css('height', parent_height);
+						image.css('height', parent_height-params.padding);
 					}
 					else {
 						image.css('width', parent_width);
@@ -134,7 +138,7 @@
 				}
 				else {
 					if (params.scale == 'fit') {
-						image.css('width', parent_width);
+						image.css('width', parent_width-params.padding);
 					}
 					else {
 						image.css('height', parent_height);
@@ -146,7 +150,7 @@
 				var new_width = image.width(),
 					new_height = image.height();
 
-				image.css({'margin-left': 0, 'margin-top': 0});
+				image.css({'margin-left': params.padding/2, 'margin-top': params.padding/2});
 
 				if (new_width > parent_width) {
 					image.css(
